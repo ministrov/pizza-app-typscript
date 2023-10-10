@@ -13,6 +13,7 @@ function App() {
     <>
       {counter}
       <Button onClick={() => addCounter}>Button</Button>
+      <Button onClick={() => addCounter} appearence={'big'}>Button</Button>
     </>
   );
 }
