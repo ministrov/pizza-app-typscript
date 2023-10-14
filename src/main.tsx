@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import App from './App.tsx';
-import Layout from './layout/Menu/Menu.tsx';
+import Layout from './layout/Menu/Layout.tsx';
 import Menu from './pages/Menu/Menu.tsx';
 import Cart from './pages/Cart/Cart.tsx';
 import Error from './pages/Error/Error.tsx';

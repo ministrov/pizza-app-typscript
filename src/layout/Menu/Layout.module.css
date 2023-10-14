@@ -1,0 +1,22 @@
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  border-right: 1px solid var(--separator-color);
+}
+
+.exit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  width: 117px;
+  max-height: 43px;
+  margin-top: auto;
+  padding: 0;
+}
