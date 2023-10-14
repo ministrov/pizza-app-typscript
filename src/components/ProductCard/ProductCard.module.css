@@ -1,0 +1,84 @@
+.card {
+  width: 320px;
+  border-radius: 19px;
+  background: var(--white-color);
+  box-shadow: 19px 18.21429px 36.42857px 0px rgba(211, 209, 216, 0.25);
+}
+
+.header {
+  position: relative;
+  min-height: 165px;
+  border-radius: 19px;
+}
+
+.footer {
+  padding: 12px;
+}
+
+.title {
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 22px;
+  color: var(--text-color);
+}
+
+.description {
+  font-family: Open Sans;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--text-secondary-color);
+}
+
+.link {
+  text-decoration: none;
+}
+
+.price {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  padding: 3px 10px;
+  color: #111719;
+  font-size: 20px;
+  line-height: 24px;
+  background-color: var(--white-color);
+  border-radius: 10px;
+}
+
+.currency {
+  color: var(--primary-color);
+}
+
+.add-to-card {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.add-to-card img {
+  width: 64px;
+  height: 64px;
+}
+
+.rating {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  padding: 3px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 16px;
+  color: #111719;
+  background-color: var(--white-color);
+  border-radius: 10px;
+  box-shadow: 0px 6.07143px 24.28572px 0px rgba(254, 114, 76, 0.20);
+}
