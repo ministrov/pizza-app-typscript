@@ -1,0 +1,8 @@
+.heading {
+  margin: 0;
+  font-family: inherit;
+  font-size: 36.413px;
+  font-weight: 600;
+  line-height: 43.695px;
+  color: var(--text-color);
+}

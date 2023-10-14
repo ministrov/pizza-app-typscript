@@ -1,6 +1,12 @@
+import Heading from '../../components/Headling/Heading';
+
 function Menu() {
   return (
-    <div> Menu</div>
+    <div>
+      <Heading>
+        Меню
+      </Heading>
+    </div>
   );
 }
 
