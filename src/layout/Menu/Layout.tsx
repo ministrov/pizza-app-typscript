@@ -1,13 +1,21 @@
-import { Link, Outlet } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Link, Outlet, useLocation } from 'react-router-dom';
+import cn from 'classnames';
 import styles from './Layout.module.css';
 import Button from '../../components/Button/Button';
 
 function Layout() {
+  const location = useLocation();
+
+  useEffect(() => {
+    console.log(location);
+  }, [location]);
+
   return (
     <div className={styles['layout']}>
       <div className={styles['sidebar']}>
         <div className={styles['user']}>
-          <img src="/avatar.png" alt="User avatar icon" />
+          <img className={styles['avatar']} src="/avatar.png" alt="User avatar icon" />
           <div className={styles['name']}>
             Антон Жилин
           </div>
@@ -16,11 +24,15 @@ function Layout() {
           </div>
         </div>
         <div className={styles['menu']}>
-          <Link to='/' className={styles['link']}>
+          <Link to='/' className={cn(styles['link'], {
+            [styles.active]: location.pathname === '/'
+          })}>
             <img src="/menu-icon.svg" alt="Menu icon" />
             Menu
           </Link>
-          <Link to='/cart' className={styles['link']}>
+          <Link to='/cart' className={cn(styles['link'], {
+            [styles.active]: location.pathname === '/cart'
+          })}>
             <img src="/cart-icon.svg" alt="Cart icon" />
             Cart
           </Link>
