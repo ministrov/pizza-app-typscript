@@ -4,3 +4,5 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
   appearence?: 'big' | 'small';
 }
+
+// Some changes I've just done
