@@ -1,9 +1,50 @@
+import { useState, useEffect } from 'react';
+import { PREFIX } from '../../helpers/API';
 import Heading from '../../components/Headling/Heading';
-import ProductCard from '../../components/ProductCard/ProductCard';
 import Search from '../../components/Search/Search';
 import styles from './Menu.module.css';
+import { Product } from '../../interfaces/product.interface';
+import axios, { AxiosError } from 'axios';
+import { MenuList } from './MenuList/MenuList';
 
 function Menu() {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | undefined>();
+  
+  useEffect(() => {
+    const getMenu = async () => {
+      try {
+        setIsLoading(true);
+        const { data } = await axios.get<Product[]>(`${PREFIX}/products`);
+        setProducts(data);
+        setIsLoading(false);
+      } catch (e) {
+        console.error(e);
+        if (e instanceof AxiosError) {
+          setError(e.message);
+        }
+        setIsLoading(false);
+        return;
+      }
+      // try {
+      //   const response = await fetch(`${PREFIX}/products`);
+
+      //   if (!response.ok) {
+      //     return;
+      //   }
+
+      //   const data = await response.json() as Product[];
+      //   setProducts(data);
+      // } catch (e) {
+      //   console.error(e);
+      // }
+    };
+
+    getMenu();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <>
       <div className={styles['head']}>
@@ -13,14 +54,9 @@ function Menu() {
         <Search placeholder='Введите блюдо или состав' />
       </div>
       <div className={styles['list']}>
-        <ProductCard
-          id={1}
-          title={'Наслаждение'}
-          description={'Салями, руккола, помидоры, оливки'}
-          image={'/product-demo.jpg'}
-          price={300}
-          rating={4.5}
-        />
+        {error && <>{error}</>}
+        {!isLoading && <MenuList products={products}/>}
+        {isLoading && <>Loading products......</>}
       </div>
     </>
   );
