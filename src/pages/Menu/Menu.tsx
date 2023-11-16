@@ -1,15 +1,16 @@
 import { useState, useEffect } from 'react';
 import { PREFIX } from '../../helpers/API';
 import Heading from '../../components/Headling/Heading';
-import ProductCard from '../../components/ProductCard/ProductCard';
 import Search from '../../components/Search/Search';
 import styles from './Menu.module.css';
 import { Product } from '../../interfaces/product.interface';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
+import { MenuList } from './MenuList/MenuList';
 
 function Menu() {
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | undefined>();
   
   useEffect(() => {
     const getMenu = async () => {
@@ -18,7 +19,6 @@ function Menu() {
         await new Promise<void>((resolve) => {
           setTimeout(() => {
             resolve();
-            console.log('resolve');
           }, 2000);
         });
         const { data } = await axios.get<Product[]>(`${PREFIX}/products`);
@@ -26,6 +26,9 @@ function Menu() {
         setIsLoading(false);
       } catch (e) {
         console.error(e);
+        if (e instanceof AxiosError) {
+          setError(e.message);
+        }
         setIsLoading(false);
         return;
       }
@@ -56,17 +59,8 @@ function Menu() {
         <Search placeholder='Введите блюдо или состав' />
       </div>
       <div className={styles['list']}>
-        {!isLoading && products.map(product => (
-          <ProductCard
-            key={product.id}
-            id={product.id}
-            name={product.name}
-            description={product.ingredients.join(', ')}
-            image={product.image}
-            price={product.price}
-            rating={product.rating}
-          />
-        ))}
+        {error && <>{error}</>}
+        {!isLoading && <MenuList products={products}/>}
         {isLoading && <>Loading products......</>}
       </div>
     </>
