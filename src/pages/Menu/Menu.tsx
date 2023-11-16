@@ -5,26 +5,42 @@ import ProductCard from '../../components/ProductCard/ProductCard';
 import Search from '../../components/Search/Search';
 import styles from './Menu.module.css';
 import { Product } from '../../interfaces/product.interface';
+import axios from 'axios';
 
 function Menu() {
   const [products, setProducts] = useState<Product[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   
   useEffect(() => {
     const getMenu = async () => {
       try {
-        const response = await fetch(`${PREFIX}/products`);
-
-        if (!response.ok) {
-          return;
-        }
-
-        const data = await response.json() as Product[];
+        setIsLoading(true);
+        await new Promise<void>((resolve) => {
+          setTimeout(() => {
+            resolve();
+            console.log('resolve');
+          }, 2000);
+        });
+        const { data } = await axios.get<Product[]>(`${PREFIX}/products`);
         setProducts(data);
+        setIsLoading(false);
       } catch (e) {
         console.error(e);
+        setIsLoading(false);
+        return;
       }
+      // try {
+      //   const response = await fetch(`${PREFIX}/products`);
 
-      console.log(products);
+      //   if (!response.ok) {
+      //     return;
+      //   }
+
+      //   const data = await response.json() as Product[];
+      //   setProducts(data);
+      // } catch (e) {
+      //   console.error(e);
+      // }
     };
 
     getMenu();
@@ -40,14 +56,18 @@ function Menu() {
         <Search placeholder='Введите блюдо или состав' />
       </div>
       <div className={styles['list']}>
-        <ProductCard
-          id={1}
-          title={'Наслаждение'}
-          description={'Салями, руккола, помидоры, оливки'}
-          image={'/product-demo.jpg'}
-          price={300}
-          rating={4.5}
-        />
+        {!isLoading && products.map(product => (
+          <ProductCard
+            key={product.id}
+            id={product.id}
+            name={product.name}
+            description={product.ingredients.join(', ')}
+            image={product.image}
+            price={product.price}
+            rating={product.rating}
+          />
+        ))}
+        {isLoading && <>Loading products......</>}
       </div>
     </>
   );
