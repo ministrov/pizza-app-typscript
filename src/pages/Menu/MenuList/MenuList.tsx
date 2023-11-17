@@ -3,12 +3,11 @@ import { MenuListProps } from './MenuList.props';
 import styles from './MenuList.module.css';
 
 export function MenuList({ products }: MenuListProps) {
-  
+
   const capitalizeFirsLowerCaseRest = (str: string): string => {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
   };
 
-  console.log(capitalizeFirsLowerCaseRest('booby her'));
   return (
     <div className={styles['wrapper']}>
       {products.map(product => (

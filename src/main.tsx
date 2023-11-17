@@ -1,14 +1,20 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import ReactDOM from 'react-dom/client';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Layout from './layout/Menu/Layout.tsx';
-import Menu from './pages/Menu/Menu.tsx';
+// import Menu from './pages/Menu/Menu.tsx';
 import Cart from './pages/Cart/Cart.tsx';
 import Product from './pages/Product/Product.tsx';
 import Error from './pages/Error/Error.tsx';
 import './index.css';
 import { PREFIX } from './helpers/API.ts';
 import axios from 'axios';
+import AuthLayout from './layout/Auth/AuthLayout.tsx';
+import Login from './pages/Login/Login.tsx';
+import Register from './pages/Register/Register.tsx';
+
+// eslint-disable-next-line react-refresh/only-export-components
+const Menu = lazy(() => import('./pages/Menu/Menu'));
 
 const router = createBrowserRouter([
   {
@@ -17,7 +23,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <Menu />
+        element: <Suspense fallback={<>Loading....</>}><Menu /></Suspense>
       },
       {
         path: '/cart',
@@ -36,6 +42,20 @@ const router = createBrowserRouter([
           const { data } = await axios.get(`${PREFIX}/products/${params.id}`);
           return data; 
         }
+      }
+    ]
+  },
+  {
+    path: '/auth',
+    element: <AuthLayout />,
+    children: [
+      {
+        path: 'login',
+        element: <Login />
+      },
+      {
+        path: 'register',
+        element: <Register />
       }
     ]
   },
