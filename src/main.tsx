@@ -33,7 +33,7 @@ const router = createBrowserRouter([
               resolve();
             }, 2000);
           });
-          const { data } = await axios.get(`${PREFIX}/productsddd/${params.id}`);
+          const { data } = await axios.get(`${PREFIX}/products/${params.id}`);
           return data; 
         }
       }
