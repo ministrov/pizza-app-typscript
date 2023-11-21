@@ -18,6 +18,7 @@ export type LoginForm = {
 };
 
 function Login() {
+  const [isValid, setIsValid] = useState<boolean>(true);
   const [error, setError] = useState<string | null>();
   const navigate = useNavigate();
   
@@ -28,9 +29,7 @@ function Login() {
     const target = event.target as typeof event.target & LoginForm;
     const { email, password } = target;
     await sendLogin(email.value, password.value);
-    
-    
-    console.log(event);
+    checkInputValidation(isValid);
   };
 
   const sendLogin = async (email: string, password: string) => {
@@ -42,14 +41,16 @@ function Login() {
       
       localStorage.setItem('jwt', data.access_token);
       navigate('/');
-      console.log(data);
-      console.log(navigate);
     } catch (e) {
       if (e instanceof AxiosError) {
         setError(e.response?.data.message);
-        console.log(e);
       }
     }
+  };
+
+  const checkInputValidation = (flag: boolean) => {
+    console.log(flag);
+    setIsValid(false);
   };
 
   return (
@@ -59,7 +60,7 @@ function Login() {
       <form className={styles['form']} onSubmit={submitHandler}>
         <div className={styles['field']}>
           <label htmlFor='email'>Ваш email</label>
-          <Input id='email' name='email' placeholder='Email'/>
+          <Input id='email' name='email' isValid={isValid} placeholder='Email'/>
         </div>
 
         <div className={styles['field']}>
