@@ -1,4 +1,4 @@
-import { FormEvent } from 'react';
+import { FormEvent, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../../components/Button/Button';
 import Heading from '../../components/Headling/Heading';
@@ -17,8 +17,11 @@ export type LoginForm = {
 };
 
 function Login() {
+  const [error, setError] = useState<string | null>();
+  
   const submitHandler = async (event: FormEvent) => {
     event.preventDefault();
+    setError(null);
 
     const target = event.target as typeof event.target & LoginForm;
     const { email, password } = target;
@@ -38,6 +41,7 @@ function Login() {
       console.log(data);
     } catch (e) {
       if (e instanceof AxiosError) {
+        setError(e.response?.data.message);
         console.log(e);
       }
     }
@@ -46,6 +50,7 @@ function Login() {
   return (
     <div className={styles['login']}>
       <Heading>Вход</Heading>
+      {error && <div className={styles['error']}>{error}</div>}
       <form className={styles['form']} onSubmit={submitHandler}>
         <div className={styles['field']}>
           <label htmlFor='email'>Ваш email</label>
