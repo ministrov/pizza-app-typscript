@@ -54,3 +54,7 @@
   color: white;
   background: #ff2929;
 }
+
+.field label.invalid {
+  color: #ff2929;
+}

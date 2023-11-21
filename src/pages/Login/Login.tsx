@@ -7,6 +7,7 @@ import styles from './Login.module.css';
 import axios, { AxiosError } from 'axios';
 import { PREFIX } from '../../helpers/API';
 import { LoginResponse } from '../../interfaces/auth.interface';
+import cn from 'classnames';
 
 export type LoginForm = {
   email: {
@@ -16,10 +17,6 @@ export type LoginForm = {
     value: string
   }
 };
-
-// const LABEL_STYLE = {
-//   color: 'red'
-// };
 
 function Login() {
   const [isValidEmail, setIsValidEmail] = useState<boolean>(true);
@@ -73,12 +70,20 @@ function Login() {
       {error && <div className={styles['error']}>Email and Password fields must be filled in</div>}
       <form className={styles['form']} onSubmit={submitHandler}>
         <div className={styles['field']}>
-          <label htmlFor='email'>Ваш email</label>
+          <label className={cn({ [styles['invalid']]: !isValidEmail})} 
+            htmlFor='email'
+          >
+            Ваш email
+          </label>
           <Input id='email' name='email' isValid={isValidEmail} placeholder='Email'/>
         </div>
 
         <div className={styles['field']}>
-          <label htmlFor='password'>Ваш пароль</label>
+          <label className={cn({ [styles['invalid']]: !isValidPassword })} 
+            htmlFor='password'
+          >
+            Ваш пароль
+          </label>
           <Input id='password' name='password' isValid={isValidPassword} type='password' placeholder='Пароль'/>
         </div>
 
