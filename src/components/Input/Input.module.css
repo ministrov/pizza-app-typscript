@@ -16,9 +16,22 @@
   box-shadow: 15px 20px 45px 0px rgba(233, 233, 233, 0.25);
 }
 
+.input:focus {
+  outline: none;
+  border-color: var(--c-4-c-4-c-4);
+}
+
 .input::placeholder {
   font-family: 'Open Sans', sans-serif;
   font-size: 17px;
   line-height: 21px;
   color: var(--c-4-c-4-c-4);
+}
+
+.input.invalid::placeholder {
+  color: #ff2929;
+}
+
+.input.invalid {
+  border-color: #ff2929;
 }

@@ -1,5 +1,4 @@
 import { Outlet } from 'react-router-dom';
-// import cn from 'classnames';
 import styles from './AuthLayout.module.css';
 
 function AuthLayout() {

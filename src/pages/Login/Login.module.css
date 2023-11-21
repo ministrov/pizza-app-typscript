@@ -24,7 +24,7 @@
 }
 
 .field:last-of-type {
-  margin-bottom: 74px;
+  margin-bottom: 54px;
 }
 
 .links {
@@ -46,4 +46,15 @@
   line-height: 18px;
   text-decoration: none;
   color: var(--primary-color);
+}
+
+.error {
+  padding: 15px;
+  font-weight: 500;
+  color: white;
+  background: #ff2929;
+}
+
+.field label.invalid {
+  color: #ff2929;
 }
