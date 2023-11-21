@@ -17,8 +17,13 @@ export type LoginForm = {
   }
 };
 
+// const LABEL_STYLE = {
+//   color: 'red'
+// };
+
 function Login() {
-  const [isValid, setIsValid] = useState<boolean>(true);
+  const [isValidEmail, setIsValidEmail] = useState<boolean>(true);
+  const [isValidPassword, setIsValidPassword] = useState<boolean>(true);
   const [error, setError] = useState<string | null>();
   const navigate = useNavigate();
   
@@ -29,7 +34,21 @@ function Login() {
     const target = event.target as typeof event.target & LoginForm;
     const { email, password } = target;
     await sendLogin(email.value, password.value);
-    checkInputValidation(isValid);
+    const email_pattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+    const password_pattern = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{3,8}$/;
+    
+    if (email.value === '' && password.value === '') {
+      setIsValidEmail(false);
+      setIsValidPassword(false);
+    }
+
+    if (!email_pattern.test(email.value)) {
+      setIsValidEmail(false);
+    }
+
+    if (!password_pattern.test(password.value)) {
+      setIsValidPassword(false);
+    }
   };
 
   const sendLogin = async (email: string, password: string) => {
@@ -48,24 +67,19 @@ function Login() {
     }
   };
 
-  const checkInputValidation = (flag: boolean) => {
-    console.log(flag);
-    setIsValid(false);
-  };
-
   return (
     <div className={styles['login']}>
       <Heading>Вход</Heading>
-      {error && <div className={styles['error']}>{error}</div>}
+      {error && <div className={styles['error']}>Email and Password fields must be filled in</div>}
       <form className={styles['form']} onSubmit={submitHandler}>
         <div className={styles['field']}>
           <label htmlFor='email'>Ваш email</label>
-          <Input id='email' name='email' isValid={isValid} placeholder='Email'/>
+          <Input id='email' name='email' isValid={isValidEmail} placeholder='Email'/>
         </div>
 
         <div className={styles['field']}>
           <label htmlFor='password'>Ваш пароль</label>
-          <Input id='password' name='password' type='password' placeholder='Пароль'/>
+          <Input id='password' name='password' isValid={isValidPassword} type='password' placeholder='Пароль'/>
         </div>
 
         <Button appearence='big'>Вход</Button>
