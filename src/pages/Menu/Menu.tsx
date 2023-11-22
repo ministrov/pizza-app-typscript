@@ -6,6 +6,7 @@ import styles from './Menu.module.css';
 import { Product } from '../../interfaces/product.interface';
 import axios, { AxiosError } from 'axios';
 import { MenuList } from './MenuList/MenuList';
+import { Counter } from '../../components/Counter/Counter';
 
 function Menu() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -58,6 +59,8 @@ function Menu() {
         {!isLoading && <MenuList products={products}/>}
         {isLoading && <>Loading products......</>}
       </div>
+
+      <Counter/>
     </>
   );
 }
