@@ -59,7 +59,7 @@ function Login() {
         password
       });
       
-      localStorage.setItem('jwt', data.access_token);
+      // localStorage.setItem('jwt', data.access_token);
       dispatch(userActions.addJwt(data.access_token));
       navigate('/');
     } catch (e) {

@@ -1,11 +1,18 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { loadState } from './storage';
+
+export const JWT_PERSISTEN_KEY = 'userData';
+
+export interface UserPersistantState {
+  jwt: string | null
+}
 
 export interface UserState {
   jwt: string | null;
 }
 
 const initialState: UserState = {
-  jwt: null
+  jwt: loadState<UserPersistantState>(JWT_PERSISTEN_KEY)?.jwt ?? null
 };
 
 export const userSlice = createSlice({
