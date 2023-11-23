@@ -6,7 +6,7 @@ import Heading from '../../components/Headling/Heading';
 import Input from '../../components/Input/Input';
 import cn from 'classnames';
 import { AppDispatch, RootState } from '../../store/store';
-import { login } from '../../store/user.slice';
+import { login, userActions } from '../../store/user.slice';
 import styles from './Login.module.css';
 
 export type LoginForm = {
@@ -21,10 +21,9 @@ export type LoginForm = {
 function Login() {
   const [isValidEmail, setIsValidEmail] = useState<boolean>(true);
   const [isValidPassword, setIsValidPassword] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>();
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
-  const jwt = useSelector((state: RootState) => state.user.jwt);
+  const { jwt, loginErrorMessage} = useSelector((state: RootState) => state.user);
 
   useEffect(() => {
     if (jwt) {
@@ -34,7 +33,7 @@ function Login() {
   
   const submitHandler = async (event: FormEvent) => {
     event.preventDefault();
-    setError(null);
+    dispatch(userActions.clearLoginError());
 
     const target = event.target as typeof event.target & LoginForm;
     const { email, password } = target;
@@ -77,7 +76,7 @@ function Login() {
   return (
     <div className={styles['login']}>
       <Heading>Вход</Heading>
-      {error && <div className={styles['error']}>Email and Password fields must be filled in</div>}
+      {loginErrorMessage && <div className={styles['error']}>{loginErrorMessage}</div>}
       <form className={styles['form']} onSubmit={submitHandler}>
         <div className={styles['field']}>
           <label className={cn({ [styles['invalid']]: !isValidEmail})} 
