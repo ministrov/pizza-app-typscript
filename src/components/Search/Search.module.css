@@ -14,15 +14,25 @@
   color: var(--c-4-c-4-c-4);
   background-color: #FCFCFD;
   border: none;
-  border-radius: 10px;
   border: 1px solid #EFEFEF;
   border-radius: 10px;
   box-shadow: 15px 20px 45px 0px rgba(233, 233, 233, 0.25);
 }
 
+.input::placeholder {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  line-height: 18px;
+  color: #9AA0B4;
+}
+
+.input:focus {
+  outline: none;
+}
+
 .search {
   position: absolute;
   top: 50%;
-  left: 24px;
+  left: 22px;
   transform: translateY(-50%);
 }
