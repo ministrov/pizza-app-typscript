@@ -73,3 +73,17 @@
   padding-left: 60px;
   padding-right: 60px;
 }
+
+.cart-count {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  line-height: 14px;
+  color: var(--white-color);
+  background-color: var(--primary-color);
+  border-radius: 50%;
+}
