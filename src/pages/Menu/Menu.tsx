@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, ChangeEvent } from 'react';
 import { PREFIX } from '../../helpers/API';
 import Heading from '../../components/Headling/Heading';
 import Search from '../../components/Search/Search';
@@ -12,12 +12,17 @@ function Menu() {
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | undefined>();
-  
+  const [filter, setFilter] = useState<string>('');
+
   useEffect(() => {
-    const getMenu = async () => {
+    const getMenu = async (name?: string) => {
       try {
         setIsLoading(true);
-        const { data } = await axios.get<Product[]>(`${PREFIX}/products`);
+        const { data } = await axios.get<Product[]>(`${PREFIX}/products`, {
+          params: {
+            name
+          }
+        });
         setProducts(data);
         setIsLoading(false);
       } catch (e) {
@@ -28,23 +33,14 @@ function Menu() {
         setIsLoading(false);
         return;
       }
-      // try {
-      //   const response = await fetch(`${PREFIX}/products`);
-
-      //   if (!response.ok) {
-      //     return;
-      //   }
-
-      //   const data = await response.json() as Product[];
-      //   setProducts(data);
-      // } catch (e) {
-      //   console.error(e);
-      // }
     };
 
-    getMenu();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    getMenu(filter);
+  }, [filter]);
+
+  const updateFilter = (event: ChangeEvent<HTMLInputElement>) => {
+    setFilter(event.target.value);
+  };
 
   return (
     <>
@@ -52,12 +48,13 @@ function Menu() {
         <Heading>
           Меню
         </Heading>
-        <Search placeholder='Введите блюдо или состав' />
+        <Search onChange={updateFilter} placeholder='Введите блюдо или состав' />
       </div>
       <div className={styles['list']}>
         {error && <>{error}</>}
-        {!isLoading && <MenuList products={products}/>}
+        {!isLoading && products.length > 0 && <MenuList products={products}/>}
         {isLoading && <>Loading products......</>}
+        {!isLoading && products.length === 0 && <>Не найденно блюд по запросу</>}
       </div>
 
       <Counter/>
