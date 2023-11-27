@@ -2,9 +2,9 @@ import { MouseEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { ProductCardProps } from './ProductCard.props';
-import styles from './ProductCard.module.css';
 import { AppDispatch } from '../../store/store';
 import { cartActions } from '../../store/cart.slice';
+import styles from './ProductCard.module.css';
 
 function ProductCard(props: ProductCardProps) {
   const dispatch = useDispatch<AppDispatch>();

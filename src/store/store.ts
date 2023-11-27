@@ -17,7 +17,7 @@ store.subscribe(() => {
   saveState({jwt: store.getState().user.jwt}, JWT_PERSISTEN_KEY);
 });
 
-store.subscribe(() => console.info(store.getState()));
+// store.subscribe(() => console.info(store.getState()));
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

@@ -32,6 +32,8 @@ export const login = createAsyncThunk('user/login',
         password: params.password
       });
 
+      console.log(data);
+
       return data;
     } catch (e) {
       if (e instanceof AxiosError) {
@@ -91,6 +93,8 @@ export const userSlice = createSlice({
 
   extraReducers: (builder) => {
     builder.addCase(login.fulfilled, (state, action) => {
+      console.log(state);
+      console.log(action.payload);
       if (!action.payload) {
         return;
       }
