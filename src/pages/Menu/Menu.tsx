@@ -1,12 +1,12 @@
 import { useState, useEffect, ChangeEvent } from 'react';
-import { PREFIX } from '../../helpers/API';
 import Heading from '../../components/Headling/Heading';
 import Search from '../../components/Search/Search';
-import styles from './Menu.module.css';
-import { Product } from '../../interfaces/product.interface';
-import axios, { AxiosError } from 'axios';
 import { MenuList } from './MenuList/MenuList';
 import { Counter } from '../../components/Counter/Counter';
+import { Product } from '../../interfaces/product.interface';
+import { PREFIX } from '../../helpers/API';
+import axios, { AxiosError } from 'axios';
+import styles from './Menu.module.css';
 
 function Menu() {
   const [products, setProducts] = useState<Product[]>([]);
