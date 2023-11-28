@@ -12,11 +12,11 @@ function CardItem(props: CardItemProps) {
   };
 
   const decrease = () => {
-  
+    dispatch(cartActions.remove(props.id));
   };
 
   const removeItem = () => {
-
+    dispatch(cartActions.deleteItem(props.id));
   };
 
   return (
