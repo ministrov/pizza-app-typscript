@@ -28,14 +28,14 @@ function CardItem(props: CardItemProps) {
       </div>
       <div className={styles['actions']}>
         <button className={styles['minus']} onClick={decrease}>
-          <img src="/minus-icon.png" alt="Уменьшение значения" />
+          <span>&#8722;</span>
         </button>
-        {props.count}
+        <div className={styles['number']}>{props.count}</div>
         <button className={styles['plus']} onClick={increase}>
-          <img src="/plus-icon.png" alt="Увеличение значения" />
+          <span>&#43;</span>
         </button>
         <button className={styles['delete']} onClick={removeItem}>
-          <img src="/delete-icon.png" alt="Удаление из корзины" />
+          <span>&#x2715;</span>
         </button>
       </div>
     </div>
