@@ -24,23 +24,19 @@ function CardItem(props: CardItemProps) {
       <div className={styles['image']} style={{ backgroundImage: `url('${props.image}')` }}></div>
       <div className={styles['description']}>
         <div className={styles['name']}>{props.name}</div>
-        <div className={styles['currency']}>{props.price}&nbsp;₽</div>
+        <div className={styles['price']}>{props.price}&nbsp;₽</div>
       </div>
       <div className={styles['actions']}>
-        <button className={styles['button']} onClick={decrease}>
-          <img src="/cart-button-icon.svg" alt="Удалить из корзины" />
+        <button className={styles['minus']} onClick={decrease}>
+          <img src="/minus-icon.png" alt="Уменьшение значения" />
         </button>
         {props.count}
-        <button className={styles['button']} onClick={increase}>
-          <img src="/cart-button-icon.svg" alt="Добавить в корзину" />
+        <button className={styles['plus']} onClick={increase}>
+          <img src="/plus-icon.png" alt="Увеличение значения" />
         </button>
-        <button className={styles['remove']} onClick={removeItem}>
-          <img src="/cart-button-icon.svg" alt="Удалить все" />
+        <button className={styles['delete']} onClick={removeItem}>
+          <img src="/delete-icon.png" alt="Удаление из корзины" />
         </button>
-      </div>
-      <div className={styles['rating']}>
-        {/* {props.rating}&nbsp; */}
-        <img src="/star.svg" alt="Rating icon" />
       </div>
     </div>
   );

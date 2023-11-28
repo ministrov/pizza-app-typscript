@@ -6,6 +6,7 @@ import { RootState } from '../../store/store';
 import axios from 'axios';
 import { PREFIX } from '../../helpers/API';
 import CardItem from '../../components/CardItem/CardItem';
+import styles from './Cart.module.css';
 
 function Cart() {
   const [cartProducts, setCardProducts] = useState<Product[]>([]);
@@ -21,6 +22,8 @@ function Cart() {
     const loadAllItems = async () => {
       const result = await Promise.all(items.map(item => getItems(item.id)));
 
+      console.log(result);
+
       setCardProducts(result);
     };
 
@@ -28,9 +31,8 @@ function Cart() {
 
   }, [items]);
 
-  console.log(items);
   return <>
-    <Heading>Корзина</Heading>
+    <Heading className={styles['headling']}>Корзина</Heading>
 
     {items.map(item => {
       const product = cartProducts.find(product => product.id === item.id);
@@ -39,7 +41,7 @@ function Cart() {
         return;
       }
 
-      return <CardItem count={item.count} {...product} />;
+      return <CardItem key={item.id} count={item.count} {...product} />;
     })}
   </>;
 }
