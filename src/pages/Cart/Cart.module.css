@@ -1,3 +1,62 @@
 .headling {
   margin-bottom: 40px;
 }
+
+.promo-code {
+  display: flex;
+  justify-content: space-between;
+  max-width: 517px;
+  margin-bottom: 40px;
+  padding: 3px;
+  border-radius: 100px;
+  border: 1px solid #EEE; 
+}
+
+.promo-code-field {
+  width: 100%;
+  padding: 0;
+  padding-left: 12px;
+  border: none;
+  border-radius: 100px;
+}
+
+.promo-code-field::placeholder {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 18px;
+   color: #BEBEBE;
+}
+
+.ordering {
+  max-width: 517px;
+}
+
+.line {
+  display: flex;
+  justify-content: space-between;
+  padding: 17px 0;
+}
+
+.line span {
+  font-size: 14px;
+  line-height: 18px;
+  color: #9796A1;
+}
+
+.text {
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--text-color);
+}
+
+.hr {
+  margin: 0;
+  border: 1px solid #F1F2F3;
+}
+
+.price {
+  font-size: 19px;
+  line-height: 23px;
+  color: var(--text-color);
+}
