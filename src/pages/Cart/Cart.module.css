@@ -1,3 +1,33 @@
 .headling {
   margin-bottom: 40px;
 }
+
+.promo-code {
+  display: flex;
+  justify-content: space-between;
+  max-width: 517px;
+  margin-bottom: 40px;
+  padding: 3px;
+  border-radius: 100px;
+  border: 1px solid #EEE; 
+}
+
+.promo-code-field {
+  width: 100%;
+  padding: 0;
+  padding-left: 12px;
+  border: none;
+  border-radius: 100px;
+}
+
+.promo-code-field::placeholder {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 18px;
+   color: #BEBEBE;
+}
+
+.ordering {
+  max-width: 517px;
+}
