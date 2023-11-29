@@ -14,6 +14,15 @@ const DELIVERY_FEE = 169;
 function Cart() {
   const [cartProducts, setCardProducts] = useState<Product[]>([]);
   const items = useSelector((state: RootState) => state.cart.items);
+  const total = items.map(item => {
+    const product = cartProducts.find(product => product.id === item.id);
+
+    if (!product) {
+      return 0;
+    }
+
+    return item.count * product.price;
+  }).reduce((acc, item) => acc += item, 0);
 
   useEffect(() => {
     const getItems = async (id: number) => {
@@ -51,18 +60,19 @@ function Cart() {
     </div>
 
     <div className={styles['ordering']}>
-      <div>
-        <div>Итог</div>
-        <div>{}</div>
+      <div className={styles['line']}>
+        <div className={styles['text']}>Итог</div>
+        <div className={styles['price']}>{total}&nbsp;<span>₽</span></div>
       </div>
-      <hr />
-      <div>
-        <div>Доставка</div>
-        <div>{DELIVERY_FEE}</div>
+      <hr className={styles['hr']}/>
+      <div className={styles['line']}>
+        <div className={styles['text']}>Доставка</div>
+        <div className={styles['price']}>{DELIVERY_FEE}&nbsp;<span>₽</span></div>
       </div>
-      <hr />
-      <div>
-        <div>Итог {items.length}</div>
+      <hr className={styles['hr']} />
+      <div className={styles['line']}>
+        <div className={styles['text']}>Итог</div>
+        <div className={styles['price']}>{total + DELIVERY_FEE}&nbsp;<span>₽</span></div>
       </div>
     </div>
   </>;

@@ -31,3 +31,32 @@
 .ordering {
   max-width: 517px;
 }
+
+.line {
+  display: flex;
+  justify-content: space-between;
+  padding: 17px 0;
+}
+
+.line span {
+  font-size: 14px;
+  line-height: 18px;
+  color: #9796A1;
+}
+
+.text {
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--text-color);
+}
+
+.hr {
+  margin: 0;
+  border: 1px solid #F1F2F3;
+}
+
+.price {
+  font-size: 19px;
+  line-height: 23px;
+  color: var(--text-color);
+}
