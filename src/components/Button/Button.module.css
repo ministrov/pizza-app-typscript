@@ -34,3 +34,11 @@
 .accent:hover {
   background-color: var(--primary-hover-color);
 }
+
+.standard {
+  padding: 0px 30px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
