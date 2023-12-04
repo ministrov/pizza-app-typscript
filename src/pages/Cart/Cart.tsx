@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Heading from '../../components/Headling/Heading';
 import Button from '../../components/Button/Button';
 import CardItem from '../../components/CardItem/CardItem';
 import { Product } from '../../interfaces/product.interface';
-import { RootState } from '../../store/store';
+import { AppDispatch, RootState } from '../../store/store';
 import axios from 'axios';
 import { PREFIX } from '../../helpers/API';
 import styles from './Cart.module.css';
 import { useNavigate } from 'react-router-dom';
+import { cartActions } from '../../store/cart.slice';
 
 const DELIVERY_FEE = 169;
 
@@ -16,6 +17,7 @@ function Cart() {
   const [cartProducts, setCardProducts] = useState<Product[]>([]);
   const items = useSelector((state: RootState) => state.cart.items);
   const jwt = useSelector((state: RootState) => state.user.jwt);
+  const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const total = items.map(item => {
     const product = cartProducts.find(product => product.id === item.id);
@@ -47,12 +49,13 @@ function Cart() {
         Authorization: `Bearer ${jwt}`
       }
     });
+    dispatch(cartActions.clean());
     navigate('/success');
   };
 
   useEffect(() => {
     loadAllItems();
-  });
+  }, [items]);
 
   return <>
     <Heading className={styles['headling']}>Корзина</Heading>
