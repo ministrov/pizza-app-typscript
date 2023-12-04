@@ -8,12 +8,15 @@ import { RootState } from '../../store/store';
 import axios from 'axios';
 import { PREFIX } from '../../helpers/API';
 import styles from './Cart.module.css';
+import { useNavigate } from 'react-router-dom';
 
 const DELIVERY_FEE = 169;
 
 function Cart() {
   const [cartProducts, setCardProducts] = useState<Product[]>([]);
   const items = useSelector((state: RootState) => state.cart.items);
+  const jwt = useSelector((state: RootState) => state.user.jwt);
+  const navigate = useNavigate();
   const total = items.map(item => {
     const product = cartProducts.find(product => product.id === item.id);
 
@@ -24,22 +27,32 @@ function Cart() {
     return item.count * product.price;
   }).reduce((acc, item) => acc += item, 0);
 
+  const getItems = async (id: number) => {
+    const { data } = await axios.get<Product>(`${PREFIX}/products/${id}`);
+
+    return data;
+  };
+
+  const loadAllItems = async () => {
+    const result = await Promise.all(items.map(item => getItems(item.id)));
+
+    setCardProducts(result);
+  };
+
+  const checkout = async () => {
+    await axios.post(`${PREFIX}/order`, {
+      products: items
+    }, {
+      headers: {
+        Authorization: `Bearer ${jwt}`
+      }
+    });
+    navigate('/success');
+  };
+
   useEffect(() => {
-    const getItems = async (id: number) => {
-      const { data } = await axios.get<Product>(`${PREFIX}/products/${id}`);
-
-      return data;
-    };
-
-    const loadAllItems = async () => {
-      const result = await Promise.all(items.map(item => getItems(item.id)));
-
-      setCardProducts(result);
-    };
-
     loadAllItems();
-
-  }, [items]);
+  });
 
   return <>
     <Heading className={styles['headling']}>Корзина</Heading>
@@ -71,8 +84,12 @@ function Cart() {
       </div>
       <hr className={styles['hr']} />
       <div className={styles['line']}>
-        <div className={styles['text']}>Итог</div>
+        <div className={styles['text']}>Итог <span>({items.length})</span></div>
         <div className={styles['price']}>{total + DELIVERY_FEE}&nbsp;<span>₽</span></div>
+      </div>
+
+      <div className={styles['checkout']}>
+        <Button appearence='big' onClick={checkout}>оформить</Button>
       </div>
     </div>
   </>;
