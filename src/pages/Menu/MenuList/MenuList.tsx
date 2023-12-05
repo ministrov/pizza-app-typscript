@@ -22,6 +22,5 @@ export function MenuList({ products }: MenuListProps) {
         />
       ))}
     </div>
-
   );
 }

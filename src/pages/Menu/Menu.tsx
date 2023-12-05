@@ -45,9 +45,7 @@ function Menu() {
   return (
     <>
       <div className={styles['head']}>
-        <Heading>
-          Меню
-        </Heading>
+        <Heading>Меню</Heading>
         <Search onChange={updateFilter} placeholder='Введите блюдо или состав' />
       </div>
       <div className={styles['list']}>

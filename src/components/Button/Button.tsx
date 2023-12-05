@@ -7,7 +7,8 @@ function Button({ children, className, appearence = 'small', ...props }: ButtonP
     <button className={cn(styles['button'], styles['accent'], className, {
       [styles['small']]: appearence === 'small',
       [styles['big']]: appearence === 'big',
-      [styles['standard']]: appearence === 'standard'
+      [styles['standard']]: appearence === 'standard',
+      [styles['with-icon']]: appearence === 'with-icon'
     })}
       {...props}>
       {children}
