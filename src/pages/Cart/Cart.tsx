@@ -29,18 +29,6 @@ function Cart() {
     return item.count * product.price;
   }).reduce((acc, item) => acc += item, 0);
 
-  const getItems = async (id: number) => {
-    const { data } = await axios.get<Product>(`${PREFIX}/products/${id}`);
-
-    return data;
-  };
-
-  const loadAllItems = async () => {
-    const result = await Promise.all(items.map(item => getItems(item.id)));
-
-    setCardProducts(result);
-  };
-
   const checkout = async () => {
     await axios.post(`${PREFIX}/order`, {
       products: items
@@ -54,6 +42,18 @@ function Cart() {
   };
 
   useEffect(() => {
+    const getItems = async (id: number) => {
+      const { data } = await axios.get<Product>(`${PREFIX}/products/${id}`);
+
+      return data;
+    };
+
+    const loadAllItems = async () => {
+      const result = await Promise.all(items.map(item => getItems(item.id)));
+
+      setCardProducts(result);
+    };
+
     loadAllItems();
   }, [items]);
 

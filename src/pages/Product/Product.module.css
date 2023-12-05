@@ -1,0 +1,39 @@
+.product {
+  max-width: 1024px;
+  margin: 0 auto;
+  background-color: tomato;
+}
+
+.product-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.link {
+  display: block;
+  width: 38px;
+  height: 38px;
+  margin-right: 36px;
+  background-color: red;
+  background-image: url('/back.svg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  border-radius: 6px;
+}
+
+.product-button {
+  margin-left: auto;
+}
+
+.product-content {
+  display: flex;
+}
+
+.product-imgage {
+  width: 50%;
+}
+
+.product-text {
+  width: 50%;
+}

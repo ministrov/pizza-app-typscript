@@ -42,11 +42,11 @@ const router = createBrowserRouter([
         element: <Product />,
         errorElement: <>Error</>,
         loader: async ({ params }) => {
-          await new Promise<void>((resolve) => {
-            setTimeout(() => {
-              resolve();
-            }, 2000);
-          });
+          // await new Promise<void>((resolve) => {
+          //   setTimeout(() => {
+          //     resolve();
+          //   }, 2000);
+          // });
           const { data } = await axios.get(`${PREFIX}/products/${params.id}`);
           return data; 
         }
