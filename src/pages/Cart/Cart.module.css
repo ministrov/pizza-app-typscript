@@ -50,6 +50,13 @@
   color: var(--text-color);
 }
 
+.text span {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 18px;
+  color: #BEBEBE;
+}
+
 .hr {
   margin: 0;
   border: 1px solid #F1F2F3;
@@ -59,4 +66,10 @@
   font-size: 19px;
   line-height: 23px;
   color: var(--text-color);
+}
+
+.checkout {
+  display: flex;
+  justify-content: center;
+  margin-top: 70px;
 }

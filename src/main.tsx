@@ -15,6 +15,7 @@ import Login from './pages/Login/Login.tsx';
 import Register from './pages/Register/Register.tsx';
 import { RequireAuth } from './helpers/RequireAuth.tsx';
 import { store } from './store/store.ts';
+import Success from './pages/Success/Success.tsx';
 
 // eslint-disable-next-line react-refresh/only-export-components
 const Menu = lazy(() => import('./pages/Menu/Menu'));
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
         element: <Suspense fallback={<>Loading....</>}><Menu /></Suspense>
       },
       {
+        path: '/success',
+        element: <Success />
+      },
+      {
         path: '/cart',
         element: <Cart />
       },
@@ -37,11 +42,11 @@ const router = createBrowserRouter([
         element: <Product />,
         errorElement: <>Error</>,
         loader: async ({ params }) => {
-          await new Promise<void>((resolve) => {
-            setTimeout(() => {
-              resolve();
-            }, 2000);
-          });
+          // await new Promise<void>((resolve) => {
+          //   setTimeout(() => {
+          //     resolve();
+          //   }, 2000);
+          // });
           const { data } = await axios.get(`${PREFIX}/products/${params.id}`);
           return data; 
         }
