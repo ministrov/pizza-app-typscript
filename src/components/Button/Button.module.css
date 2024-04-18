@@ -34,3 +34,21 @@
 .accent:hover {
   background-color: var(--primary-hover-color);
 }
+
+.standard {
+  padding: 0px 30px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+.with-icon {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  max-height: 43px;
+  padding: 13px 17px;
+  font-size: 16px;
+  line-height: 20px;
+}
