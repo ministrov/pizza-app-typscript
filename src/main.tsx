@@ -41,7 +41,6 @@ const router = createBrowserRouter([
         errorElement: <>Error</>,
         loader: async ({ params }) => {
           const { data } = await axios.get(`${PREFIX}/products/${params.id}`);
-          console.log(data);
           return data;
         }
       }

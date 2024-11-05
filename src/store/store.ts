@@ -14,10 +14,14 @@ export const store = configureStore({
 });
 
 store.subscribe(() => {
-  saveState({jwt: store.getState().user.jwt}, JWT_PERSISTEN_KEY);
+  saveState({ jwt: store.getState().user.jwt }, JWT_PERSISTEN_KEY);
   saveState(store.getState().cart, CART_PERSISTENT_STATE);
 });
 
+console.log(store.dispatch);
+console.log(store.getState);
+console.log(store.subscribe);
+console.log(store.replaceReducer);
 // store.subscribe(() => console.info(store.getState()));
 
 export type RootState = ReturnType<typeof store.getState>;

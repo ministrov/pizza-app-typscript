@@ -13,7 +13,6 @@ function Layout() {
   const profile = useSelector((state: RootState) => state.user.profile);
   const items = useSelector((state: RootState) => state.cart.items);
 
-  console.log(profile);
   useEffect(() => {
     dispatch(getProfile());
   }, [dispatch]);
