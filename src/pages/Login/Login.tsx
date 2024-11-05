@@ -12,7 +12,7 @@ import styles from './Login.module.css';
 export type LoginForm = {
   email: {
     value: string
-  }, 
+  },
   password: {
     value: string
   }
@@ -23,14 +23,14 @@ function Login() {
   const [isValidPassword, setIsValidPassword] = useState<boolean>(true);
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
-  const { jwt, loginErrorMessage} = useSelector((state: RootState) => state.user);
+  const { jwt, loginErrorMessage } = useSelector((state: RootState) => state.user);
 
   useEffect(() => {
     if (jwt) {
       navigate('/');
     }
   }, [jwt, navigate]);
-  
+
   const submitHandler = async (event: FormEvent) => {
     event.preventDefault();
     dispatch(userActions.clearLoginError());
@@ -40,7 +40,7 @@ function Login() {
     await sendLogin(email.value, password.value);
     const email_pattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
     const password_pattern = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{3,8}$/;
-    
+
     if (email.value === '' && password.value === '') {
       setIsValidEmail(false);
       setIsValidPassword(false);
@@ -57,20 +57,6 @@ function Login() {
 
   const sendLogin = async (email: string, password: string) => {
     dispatch(login({ email, password }));
-    // try {
-    //   const { data } = await axios.post<LoginResponse>(`${PREFIX}/auth/login`, {
-    //     email,
-    //     password
-    //   });
-      
-    //   // localStorage.setItem('jwt', data.access_token);
-    //   dispatch(userActions.addJwt(data.access_token));
-    //   navigate('/');
-    // } catch (e) {
-    //   if (e instanceof AxiosError) {
-    //     setError(e.response?.data.message);
-    //   }
-    // }
   };
 
   return (
@@ -79,21 +65,21 @@ function Login() {
       {loginErrorMessage && <div className={styles['error']}>{loginErrorMessage}</div>}
       <form className={styles['form']} onSubmit={submitHandler}>
         <div className={styles['field']}>
-          <label className={cn({ [styles['invalid']]: !isValidEmail})} 
+          <label className={cn({ [styles['invalid']]: !isValidEmail })}
             htmlFor='email'
           >
             Ваш email
           </label>
-          <Input id='email' name='email' isValid={isValidEmail} placeholder='Email'/>
+          <Input id='email' name='email' isValid={isValidEmail} placeholder='Email' />
         </div>
 
         <div className={styles['field']}>
-          <label className={cn({ [styles['invalid']]: !isValidPassword })} 
+          <label className={cn({ [styles['invalid']]: !isValidPassword })}
             htmlFor='password'
           >
             Ваш пароль
           </label>
-          <Input id='password' name='password' isValid={isValidPassword} type='password' placeholder='Пароль'/>
+          <Input id='password' name='password' isValid={isValidPassword} type='password' placeholder='Пароль' />
         </div>
 
         <Button appearence='big'>Вход</Button>

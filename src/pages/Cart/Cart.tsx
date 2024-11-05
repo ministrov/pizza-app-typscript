@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
 import Heading from '../../components/Headling/Heading';
 import Button from '../../components/Button/Button';
 import CardItem from '../../components/CardItem/CardItem';
-import { Product } from '../../interfaces/product.interface';
 import { AppDispatch, RootState } from '../../store/store';
-import axios from 'axios';
+import { Product } from '../../interfaces/product.interface';
 import { PREFIX } from '../../helpers/API';
-import styles from './Cart.module.css';
-import { useNavigate } from 'react-router-dom';
 import { cartActions } from '../../store/cart.slice';
+import styles from './Cart.module.css';
 
 const DELIVERY_FEE = 169;
 
@@ -72,7 +72,7 @@ function Cart() {
 
     <div className={styles['promo-code']}>
       <input className={styles['promo-code-field']} type='text' placeholder='Промокод' />
-      <Button appearence='small' children={'Применить'}/>
+      <Button appearence='small' children={'Применить'} />
     </div>
 
     <div className={styles['ordering']}>
@@ -80,7 +80,7 @@ function Cart() {
         <div className={styles['text']}>Итог</div>
         <div className={styles['price']}>{total}&nbsp;<span>₽</span></div>
       </div>
-      <hr className={styles['hr']}/>
+      <hr className={styles['hr']} />
       <div className={styles['line']}>
         <div className={styles['text']}>Доставка</div>
         <div className={styles['price']}>{DELIVERY_FEE}&nbsp;<span>₽</span></div>
