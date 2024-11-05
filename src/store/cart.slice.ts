@@ -29,6 +29,8 @@ export const cartSlice = createSlice({
     remove: (state, action: PayloadAction<number>) => {
       const existed = state.items.find(item => item.id === action.payload);
 
+      // console.log(action.payload);
+
       if (!existed) {
         return;
       }
@@ -60,6 +62,8 @@ export const cartSlice = createSlice({
     }
   }
 });
+
+// console.log(cartSlice);
 
 export default cartSlice.reducer;
 export const cartActions = cartSlice.actions;

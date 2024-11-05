@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-// import type { PayloadAction } from '@reduxjs/toolkit';
 
 export interface CounterState {
   value: number
@@ -15,12 +14,12 @@ export const counterSlice = createSlice({
   reducers: {
     increament: (state) => {
       state.value += 1;
-      console.log(state);
+      console.log(state.value);
     },
 
     decreament: (state) => {
       state.value -= 1;
-      console.log(state);
+      console.log(state.value);
     }
   }
 });

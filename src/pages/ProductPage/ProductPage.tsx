@@ -1,26 +1,24 @@
 import { Link, useLoaderData } from 'react-router-dom';
 import { Product } from '../../interfaces/product.interface';
 import Heading from '../../components/Headling/Heading';
-import styles from './Product.module.css';
+import styles from './ProductPage.module.css';
 import Button from '../../components/Button/Button';
 
-function Product() {
-
-  // const { id } = useParams();
+function ProductPage() {
   const data = useLoaderData() as Product;
 
-  console.log(data);
+  // console.log(data);
 
   return (
     <div className={styles['product']}>
       <header className={styles['product-header']}>
-        <Link to={'/'} className={styles['link']}/>
+        <Link to={'/'} className={styles['link']} />
 
         <Heading>{data.name}</Heading>
 
         <Button className={styles['product-button']} appearence='with-icon'>
           <img src="/cart-icon.svg" width={'16'} height={'17'} alt="Иконка корзины товара" />
-          В корзину
+          в корзину
         </Button>
       </header>
 
@@ -55,4 +53,4 @@ function Product() {
   );
 }
 
-export default Product;
+export default ProductPage;

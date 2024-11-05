@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { NavLink, Outlet, useNavigate } from 'react-router-dom'; 
+import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from '../../components/Button/Button';
 import { getProfile, userActions } from '../../store/user.slice';
@@ -51,7 +51,7 @@ function Layout() {
         </Button>
       </div>
       <div className={styles.content}>
-        <Outlet/>
+        <Outlet />
       </div>
     </div>
   );

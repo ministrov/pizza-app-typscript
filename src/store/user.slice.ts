@@ -1,10 +1,10 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axios, { AxiosError } from 'axios';
+import { RootState } from './store';
 import { loadState } from './storage';
+import { Profile } from '../interfaces/user.interface';
 import { LoginResponse } from '../interfaces/auth.interface';
 import { PREFIX } from '../helpers/API';
-import axios, { AxiosError } from 'axios';
-import { Profile } from '../interfaces/user.interface';
-import { RootState } from './store';
 
 export const JWT_PERSISTEN_KEY = 'userData';
 
@@ -23,8 +23,8 @@ const initialState: UserState = {
   jwt: loadState<UserPersistantState>(JWT_PERSISTEN_KEY)?.jwt ?? null
 };
 
-export const login = createAsyncThunk('user/login', 
-  async (params: { email: string, password: string}) => {
+export const login = createAsyncThunk('user/login',
+  async (params: { email: string, password: string }) => {
     try {
       console.log(params);
       const { data } = await axios.post<LoginResponse>(`${PREFIX}/auth/login`, {
